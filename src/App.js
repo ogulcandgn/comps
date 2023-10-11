@@ -1,14 +1,31 @@
-import Button from "./Button";
+import Accordion from "./components/Accordion";
 
 function App() {
+  const items = [
+    {
+      id: "abasd",
+      label: "Can I use on React Project ?",
+      content:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis sit ut porro illum ullam exercitationem voluptate modi nihil officiis laboriosam.",
+    },
+    {
+      id: "abasdsd",
+
+      label: "Can I use on JavaScript Project ?",
+      content:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis sit ut porro illum ullam exercitationem voluptate modi nihil officiis laboriosam.",
+    },
+    {
+      id: "abasd2",
+      label: "Can I use on Angular Project ?",
+      content:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis sit ut porro illum ullam exercitationem voluptate modi nihil officiis laboriosam.",
+    },
+  ];
   return (
     <div>
-      <Button>asdf</Button>
-      <Button>33</Button>
-      <Button>11</Button>
-      <h1 className="underline">deneme</h1>
+      <Accordion items={items} />
     </div>
   );
 }
-
 export default App;
