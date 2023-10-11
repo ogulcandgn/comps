@@ -2,9 +2,15 @@ import { useState } from "react";
 import { AiOutlineDown, AiOutlineLeft } from "react-icons/ai";
 
 function Accordion({ items }) {
-  const [expandedIndex, setExpandedIndex] = useState();
+  const [expandedIndex, setExpandedIndex] = useState(-1);
+
   const handleClick = (nextIndex) => {
-    setExpandedIndex(nextIndex);
+    //* kullanıcı tıkladığında content açılıp kapanır
+    if (expandedIndex === nextIndex) {
+      setExpandedIndex(-1);
+    } else {
+      setExpandedIndex(nextIndex);
+    }
   };
 
   const renderedItems = items.map((item, index) => {
