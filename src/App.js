@@ -2,7 +2,7 @@ import Dropdown from "./components/Dropdown";
 import { useState } from "react";
 
 function App() {
-  const [selected, setSelected] = useState(null);
+  const [selection, setSelected] = useState(null);
 
   //başta null olan selected'ı optionlardan birine tıkladığımız zaman içini doldurur
   const handleSelectedClick = (option) => {
@@ -18,8 +18,8 @@ function App() {
   return (
     <Dropdown
       options={options}
-      selected={selected}
-      onSelect={handleSelectedClick}
+      value={selection}
+      onChange={handleSelectedClick}
     />
   );
 }
