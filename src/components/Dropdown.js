@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { BsCaretDownFill } from "react-icons/bs";
+import { BsCaretDownFill, BsCaretLeftFill } from "react-icons/bs";
+import Panel from "./Panel";
 
 function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,20 +30,20 @@ function Dropdown({ options, value, onChange }) {
 
   return (
     <div className="w-48 relative">
-      <div
-        className="flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full"
+      <Panel
+        className="flex justify-between items-center cursor-pointer   "
         onClick={handleClick}
       >
         {value === null ? "Select.." : value.label}
         <span>
-          <BsCaretDownFill />
+          {isOpen ? (
+            <BsCaretDownFill className="text-lg" />
+          ) : (
+            <BsCaretLeftFill className="text-lg" />
+          )}
         </span>
-      </div>
-      {isOpen && (
-        <div className="absolute top-full border rounded p-3 shadow bg-white w-full ">
-          {renderedOption}
-        </div>
-      )}
+      </Panel>
+      {isOpen && <Panel className="absolute top-full ">{renderedOption}</Panel>}
     </div>
   );
 }
