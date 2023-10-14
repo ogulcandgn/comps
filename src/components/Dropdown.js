@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BsCaretDownFill, BsCaretLeftFill } from "react-icons/bs";
 import Panel from "./Panel";
 
 function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
+  //useRef kullanımı
+  const divEl = useRef();
+
+  useEffect(() => {
+    const handler = (event) => {
+      console.log(divEl.current);
+    };
+    document.addEventListener("click", handler, true);
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, []);
 
   const handleClick = () => {
     //*user menüyü açıp tekrar kapatabilsin diye state'i her zaman tersine çevirmemiz gerekiyor
@@ -29,7 +41,8 @@ function Dropdown({ options, value, onChange }) {
   });
 
   return (
-    <div className="w-48 relative">
+    //referansımızı belirledik
+    <div ref={divEl} className="w-48 relative">
       <Panel
         className="flex justify-between items-center cursor-pointer   "
         onClick={handleClick}
