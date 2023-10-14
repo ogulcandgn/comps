@@ -7,9 +7,13 @@ function Dropdown({ options, value, onChange }) {
   //useRef kullanımı
   const divEl = useRef();
 
+  //kullanıcı dropdown'u açarsa ve sayfanın başka bir kısmına tıklarsa dropdown'un kapanmasını sağlayacaktır
   useEffect(() => {
     const handler = (event) => {
-      console.log(divEl.current);
+      //kullanıcının dropdown dışında bir yere tıkladığında dropdown'un kapanmasını sağlar.
+      if (!divEl.current.contains(event.target)) {
+        setIsOpen(false);
+      }
     };
     document.addEventListener("click", handler, true);
     return () => {
