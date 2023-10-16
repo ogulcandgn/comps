@@ -22,11 +22,6 @@ function DropdownPages() {
         value={selection}
         onChange={handleSelectedClick}
       />
-      <Dropdown
-        options={options}
-        value={selection}
-        onChange={handleSelectedClick}
-      />
     </div>
   );
 }
