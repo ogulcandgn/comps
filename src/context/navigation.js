@@ -17,9 +17,14 @@ function NavigationProvider({ children }) {
     };
   }, []);
 
+  const navigate = (to) => {
+    //*reflesh olmadan yönlendirme
+    window.history.pushState({}, "", to);
+    setCurrentPath(to);
+  };
+
   return (
-    <NavigationContext.Provider value={{}}>
-      {currentPath}
+    <NavigationContext.Provider value={{ currentPath, navigate }}>
       {children}
     </NavigationContext.Provider>
   );
