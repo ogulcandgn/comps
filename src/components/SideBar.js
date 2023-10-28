@@ -13,7 +13,7 @@ function SideBar() {
         key={index}
         to={link.path}
         className="mb-3"
-        activeClassName="font-bold border-l-4 border-blue-500 pl-2"
+        activeClassName="font-bold border-l-4 border-blue-500 pl-2 "
       >
         {link.label}
       </Link>
