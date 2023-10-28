@@ -38,10 +38,4 @@ function Button({
   );
 }
 
-Button.propTypes = {
-  checkVariationValue: (props) => {
-    console.log(props);
-  },
-};
-
 export default Button;

@@ -2,18 +2,15 @@ import { AiFillStar, AiFillHome } from "react-icons/ai";
 import Button from "../components/Button";
 
 function ButtonPage() {
-  const handleClick = () => {
-    console.log("Click");
-  };
   return (
     <div>
-      <Button className="mb-5" primary onMouseEnter={handleClick}>
+      <Button className="mb-5" primary>
         asdf
       </Button>
-      <Button className="mb-5" warning rounded onMouseLeave={handleClick}>
+      <Button className="mb-5" warning rounded>
         <AiFillStar /> Hi There!
       </Button>
-      <Button onClick={handleClick} primary>
+      <Button primary>
         <AiFillHome /> Button Click!
       </Button>
       <h1 className="underline">deneme</h1>
