@@ -24,7 +24,7 @@ function ModalPage() {
   const modal = (
     <Modal onClose={onClose} actionBar={actionBar}>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
+        Lorems ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
         laborum debitis illum eaque explicabo corporis? Nesciunt odio neque
         culpa consequatur?
       </p>
@@ -33,6 +33,7 @@ function ModalPage() {
 
   const parag = (
     <div>
+      <h1 className="text-3xl">Title</h1>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
         ipsam dolorum id aliquam modi nostrum illum sed maxime et quos, beatae,
@@ -139,11 +140,15 @@ function ModalPage() {
 
   return (
     <div className="relative">
-      <Button primary onClick={handleClick}>
-        Open Modal
-      </Button>
-      {parag}
-      {showModal && modal}
+      <div className="flex flex-col justify-between">
+        {parag}
+        {showModal && modal}
+        <div className="flex justify-end">
+          <Button primary onClick={handleClick}>
+            Open Modal
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
