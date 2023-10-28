@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
-import Button from "../components/Button";
 
-function Modal({ onClose }) {
+function Modal({ onClose, children, actionBar }) {
   return ReactDOM.createPortal(
     <div>
       {/* inset-0 : bütün sayfayı kaplar */}
@@ -11,12 +10,8 @@ function Modal({ onClose }) {
       ></div>
       {/* burası modal */}
       <div className="absolute inset-80 p-10 bg-white">
-        This a modal!
-        <div>
-          <Button onClick={onClose} primary>
-            Close Modal
-          </Button>
-        </div>
+        {children}
+        <div>{actionBar}</div>
       </div>
     </div>,
     document.querySelector(".modal-container")
