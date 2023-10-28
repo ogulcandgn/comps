@@ -1,6 +1,16 @@
 import ReactDOM from "react-dom";
+import { useEffect } from "react";
 
 function Modal({ onClose, children, actionBar }) {
+  //* modal açıldığında scrool işlevi pasif olacak
+  useEffect(() => {
+    document.body.classList.add("overflow-hidden");
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, []);
+
   return ReactDOM.createPortal(
     <div>
       {/* inset-0 : bütün sayfayı kaplar */}
