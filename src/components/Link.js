@@ -2,10 +2,14 @@ import { useContext } from "react";
 import NavigationContext from "../context/navigation";
 import classNames from "classnames";
 
-function Link({ to, children }) {
-  const { navigate } = useContext(NavigationContext);
+function Link({ to, children, className, activeClassName }) {
+  const { navigate, currentPath } = useContext(NavigationContext);
 
-  const classes = classNames("text-blue-500");
+  const classes = classNames(
+    "text-blue-500",
+    className,
+    currentPath === to && activeClassName
+  );
 
   const handleClick = (event) => {
     //* command + click yapıldıgında yan sekmede acar
