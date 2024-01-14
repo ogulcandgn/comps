@@ -1,5 +1,8 @@
 function Table({ data, config }) {
   const renderedHeaders = config.map((column) => {
+    if (column.header) {
+      return <div key={column.header}>{column.header()}</div>;
+    }
     return <th key={column.label}>{column.label}</th>;
   });
 

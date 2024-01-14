@@ -15,11 +15,16 @@ function TablePage() {
     },
     {
       label: "Color",
-      render: (fruit) => fruit.color,
+      render: (fruit) => <div className={`p-3 m-2 ${fruit.color}`} />,
     },
     {
       label: "Score",
       render: (fruit) => fruit.score,
+      header: () => (
+        <th key="asdf" className="bg-red-500">
+          Score
+        </th>
+      ),
     },
   ];
 
