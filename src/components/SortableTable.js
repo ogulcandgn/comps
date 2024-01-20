@@ -14,6 +14,12 @@ function SortableTable(props) {
 
   //sıralama kontrolünün yapıldıgı yer
   const handleClick = (label) => {
+    if (sortBy && label !== sortBy) {
+      setSortOrder("asc");
+      setSortBy(label);
+      return;
+    }
+
     if (sortOrder === null) {
       setSortOrder("asc");
       setSortBy(label);
@@ -38,7 +44,9 @@ function SortableTable(props) {
           <div className="flex items-center">
             {/* artan ya da azalan sıralamaya göre icon gösterme */}
             {getIcons(column.label, sortBy, sortOrder)}
-            <div className="cursor-pointer ml-1.5">{column.label}</div>
+            <div className="cursor-pointer ml-1.5 hover:bg-gray-100">
+              {column.label}
+            </div>
           </div>
         </th>
       ),
