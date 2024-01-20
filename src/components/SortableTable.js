@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { FaArrowUp } from "react-icons/fa";
+import { FaArrowDown } from "react-icons/fa";
+import { HiArrowsUpDown } from "react-icons/hi2";
 
 import Table from "./Table";
 
@@ -32,9 +35,11 @@ function SortableTable(props) {
       ...column,
       header: () => (
         <th onClick={() => handleClick(column.label)}>
-          {/* artan ya da azalan sıralamaya göre icon gösterme */}
-          {getIcons(column.label, sortBy, sortOrder)}
-          {column.label}
+          <div className="flex items-center">
+            {/* artan ya da azalan sıralamaya göre icon gösterme */}
+            {getIcons(column.label, sortBy, sortOrder)}
+            <div className="cursor-pointer ml-1.5">{column.label}</div>
+          </div>
         </th>
       ),
     };
@@ -65,25 +70,20 @@ function SortableTable(props) {
     });
   }
 
-  return (
-    <div>
-      {sortOrder} - {sortBy}
-      <Table {...props} data={sortedData} config={updatedConfig} />
-    </div>
-  );
+  return <Table {...props} data={sortedData} config={updatedConfig} />;
 }
 
 function getIcons(label, sortBy, sortOrder) {
   if (label !== sortBy) {
-    return "show both icons";
+    return <HiArrowsUpDown />;
   }
 
   if (sortOrder === null) {
-    return "show both icons";
+    return <HiArrowsUpDown />;
   } else if (sortOrder === "asc") {
-    return "show up icons";
+    return <FaArrowUp />;
   } else if (sortOrder === "desc") {
-    return "show down icons";
+    return <FaArrowDown />;
   }
 }
 
