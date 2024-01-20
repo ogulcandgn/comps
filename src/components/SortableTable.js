@@ -7,16 +7,19 @@ function SortableTable(props) {
   const [sortOrder, setSortOrder] = useState(null);
   //score ya da name'e göre sıralama yapmak icin state tutuyoruz
   const [sortBy, setSortBy] = useState(null);
-  const { config } = props;
+  const { config, data } = props;
 
   //sıralama kontrolünün yapıldıgı yer
   const handleClick = (label) => {
     if (sortOrder === null) {
       setSortOrder("asc");
+      setSortBy(label);
     } else if (sortOrder === "asc") {
-      setSortOrder(null);
+      setSortOrder("desc");
+      setSortBy(label);
     } else if (sortOrder === "desc") {
-      setSortOrder("asc");
+      setSortOrder(null);
+      setSortBy(null);
     }
   };
 
@@ -34,7 +37,38 @@ function SortableTable(props) {
       ),
     };
   });
-  return <Table {...props} config={updatedConfig} />;
+
+  //Only sort data if sortOrder && sortBy are not null
+  //Make a copy of the 'data' prop
+  //Find the correct sortValue function and use it for sorting
+
+  let sortedData = data;
+
+  //sıralama işlemini yapan function
+  if (sortOrder && sortBy) {
+    const { sortValue } = config.find((column) => column.label === sortBy);
+    //sıralanmıs veriyi güncelleyecegiz
+    sortedData = [...data].sort((a, b) => {
+      const valueA = sortValue(a);
+      const valueB = sortValue(b);
+
+      const reverseOrder = sortOrder === "asc" ? 1 : -1;
+
+      //sıralama islemi gerceklesiyor
+      if (typeof valueA === "string") {
+        return valueA.localeCompare(valueB) * reverseOrder;
+      } else {
+        return (valueA - valueB) * reverseOrder;
+      }
+    });
+  }
+
+  return (
+    <div>
+      {sortOrder} - {sortBy}
+      <Table {...props} data={sortedData} config={updatedConfig} />
+    </div>
+  );
 }
 
 export default SortableTable;
