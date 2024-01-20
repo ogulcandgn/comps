@@ -32,7 +32,9 @@ function SortableTable(props) {
       ...column,
       header: () => (
         <th onClick={() => handleClick(column.label)}>
-          {column.label} IS SORTABLE
+          {/* artan ya da azalan sıralamaya göre icon gösterme */}
+          {getIcons(column.label, sortBy, sortOrder)}
+          {column.label}
         </th>
       ),
     };
@@ -69,6 +71,20 @@ function SortableTable(props) {
       <Table {...props} data={sortedData} config={updatedConfig} />
     </div>
   );
+}
+
+function getIcons(label, sortBy, sortOrder) {
+  if (label !== sortBy) {
+    return "show both icons";
+  }
+
+  if (sortOrder === null) {
+    return "show both icons";
+  } else if (sortOrder === "asc") {
+    return "show up icons";
+  } else if (sortOrder === "desc") {
+    return "show down icons";
+  }
 }
 
 export default SortableTable;
