@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
+//use-counter hookunu burada kullandık
+import useCounter from "../hooks/use-counter";
 
-function CounterPage({ initialCounter }) {
-  const [count, setCount] = useState(initialCounter);
-
-  useEffect(() => {
-    console.log(count);
-  }, [count]);
-
-  const handleClick = () => {
-    setCount(count + 1);
-  };
+//yukarıdaki useCounter function'unu altta kullanıyoruz
+function CounterPage({ initialCount }) {
+  const { count, increment, descrement, reset } = useCounter({ initialCount });
 
   return (
     <div>
       <h1>Count is {count}</h1>
-      <Button onClick={handleClick}>increment</Button>
+      <Button onClick={increment}>increment</Button>
+      <Button onClick={descrement}>descrement</Button>
+      <Button onClick={reset}>reset</Button>
     </div>
   );
 }
