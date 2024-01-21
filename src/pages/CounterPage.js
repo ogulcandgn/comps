@@ -6,6 +6,7 @@ import Panel from "../components/Panel";
 //yukarıdaki useCounter function'unu altta kullanıyoruz
 function CounterPage({ initialCount }) {
   const [count, setCount] = useState(initialCount);
+  const [addOfvalue, setAddOfValue] = useState(0);
 
   const decrement = () => {
     setCount(count - 1);
@@ -13,6 +14,20 @@ function CounterPage({ initialCount }) {
 
   const increment = () => {
     setCount(count + 1);
+  };
+
+  const handleChange = (e) => {
+    const value = parseInt(e.target.value) || 0;
+    console.log(value);
+
+    setAddOfValue(value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setCount(count + addOfvalue);
+    setAddOfValue(0);
   };
 
   return (
@@ -23,9 +38,12 @@ function CounterPage({ initialCount }) {
         <Button onClick={decrement}>decrement</Button>
       </div>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Add a lot!</label>
         <input
+          onChange={handleChange}
+          placeholder="Enter a number"
+          value={addOfvalue || ""}
           type="number"
           className="p-1 m-3 bg-gray-50 border border-gray-300"
         />
