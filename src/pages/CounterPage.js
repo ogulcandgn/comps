@@ -1,33 +1,42 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useReducer } from "react";
 import Button from "../components/Button";
 //use-counter hookunu burada kullandık
 import Panel from "../components/Panel";
 
+//reducer kullanımı
+const reducer = (state, action) => {};
+
 //yukarıdaki useCounter function'unu altta kullanıyoruz
 function CounterPage({ initialCount }) {
-  const [count, setCount] = useState(initialCount);
-  const [addOfvalue, setAddOfValue] = useState(0);
+  //   const [count, setCount] = useState(initialCount);
+  //   const [addOfvalue, setAddOfValue] = useState(0);
+
+  const [state, dispatch] = useReducer(reducer, {
+    count: initialCount,
+    addOfvalue: 0,
+  });
 
   const decrement = () => {
-    setCount(count - 1);
+    // setCount(count - 1);
   };
 
   const increment = () => {
-    setCount(count + 1);
+    // setCount(count + 1);
   };
 
   const handleChange = (e) => {
     const value = parseInt(e.target.value) || 0;
     console.log(value);
 
-    setAddOfValue(value);
+    // setAddOfValue(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setCount(count + addOfvalue);
-    setAddOfValue(0);
+    // setCount(count + addOfvalue);
+    // setAddOfValue(0);
   };
 
   return (
