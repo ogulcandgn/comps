@@ -5,7 +5,19 @@ import Button from "../components/Button";
 import Panel from "../components/Panel";
 
 //reducer kullanımı
-const reducer = (state, action) => {};
+const reducer = (state, action) => {
+  if (action.type === "increment") {
+    return {
+      ...state,
+      count: state.count + 1,
+    };
+  } else if (action.type === "decrement") {
+    return {
+      ...state,
+      count: state.count - 1,
+    };
+  }
+};
 
 //yukarıdaki useCounter function'unu altta kullanıyoruz
 function CounterPage({ initialCount }) {
@@ -18,11 +30,16 @@ function CounterPage({ initialCount }) {
   });
 
   const decrement = () => {
-    // setCount(count - 1);
+    dispatch({
+      type: "decrement",
+    });
   };
 
   const increment = () => {
-    // setCount(count + 1);
+    //direkt dispatch'deki reducer fonk içine gidecek
+    dispatch({
+      type: "increment",
+    });
   };
 
   const handleChange = (e) => {
@@ -41,7 +58,7 @@ function CounterPage({ initialCount }) {
 
   return (
     <Panel className="m-3">
-      <h1 className="text-lg">Count is {count}</h1>
+      <h1 className="text-lg">Count is {state.count}</h1>
       <div className="flex flex-row">
         <Button onClick={increment}>increment</Button>
         <Button onClick={decrement}>decrement</Button>
@@ -52,7 +69,7 @@ function CounterPage({ initialCount }) {
         <input
           onChange={handleChange}
           placeholder="Enter a number"
-          value={addOfvalue || ""}
+          value={state.addOfvalue || ""}
           type="number"
           className="p-1 m-3 bg-gray-50 border border-gray-300"
         />
