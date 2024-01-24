@@ -7,6 +7,7 @@ import Panel from "../components/Panel";
 const INCREMENT_COUNT = "increment";
 const DECREMENT_COUNT = "decrement";
 const CHANGE_VALUE = "change-value-to-add";
+const ADD_VALUE_TO_COUNT = "add-value";
 
 //reducer kullanımı
 const reducer = (state, action) => {
@@ -25,11 +26,18 @@ const reducer = (state, action) => {
       };
     }
 
-    case CHANGE_VALUE:
+    case CHANGE_VALUE: {
+      return {
+        ...state,
+        addOfvalue: action.payload,
+      };
+    }
+
+    case ADD_VALUE_TO_COUNT:
       {
         return {
           ...state,
-          addOfvalue: action.payload,
+          count: state.count + state.addOfvalue,
         };
       }
       throw Error("Error " + action.type);
@@ -73,7 +81,7 @@ function CounterPage({ initialCount }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({
-      type: "set-value",
+      type: ADD_VALUE_TO_COUNT,
     });
   };
 
