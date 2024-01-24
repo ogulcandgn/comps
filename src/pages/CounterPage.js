@@ -10,29 +10,30 @@ const CHANGE_VALUE = "change-value-to-add";
 
 //reducer kullanımı
 const reducer = (state, action) => {
-  if (action.type === INCREMENT_COUNT) {
-    return {
-      ...state,
-      count: state.count + 1,
-    };
-  } else if (action.type === DECREMENT_COUNT) {
-    return {
-      ...state,
-      count: state.count - 1,
-    };
-  } else if (action.type === CHANGE_VALUE) {
-    return {
-      ...state,
-      addOfvalue: action.payload,
-    };
-  } else if (action.type === "set-value") {
-    return {
-      ...state,
-      count: action.payload,
-    };
-  }
+  switch (action.type) {
+    case INCREMENT_COUNT: {
+      return {
+        ...state,
+        count: state.count + 1,
+      };
+    }
 
-  return state;
+    case DECREMENT_COUNT: {
+      return {
+        ...state,
+        count: state.count - 1,
+      };
+    }
+
+    case CHANGE_VALUE:
+      {
+        return {
+          ...state,
+          addOfvalue: action.payload,
+        };
+      }
+      throw Error("Error " + action.type);
+  }
 };
 
 //yukarıdaki useCounter function'unu altta kullanıyoruz
