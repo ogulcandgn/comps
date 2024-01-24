@@ -4,19 +4,35 @@ import Button from "../components/Button";
 //use-counter hookunu burada kullandık
 import Panel from "../components/Panel";
 
+const INCREMENT_COUNT = "increment";
+const DECREMENT_COUNT = "decrement";
+const CHANGE_VALUE = "change-value-to-add";
+
 //reducer kullanımı
 const reducer = (state, action) => {
-  if (action.type === "increment") {
+  if (action.type === INCREMENT_COUNT) {
     return {
       ...state,
       count: state.count + 1,
     };
-  } else if (action.type === "decrement") {
+  } else if (action.type === DECREMENT_COUNT) {
     return {
       ...state,
       count: state.count - 1,
     };
+  } else if (action.type === CHANGE_VALUE) {
+    return {
+      ...state,
+      addOfvalue: action.payload,
+    };
+  } else if (action.type === "set-value") {
+    return {
+      ...state,
+      count: action.payload,
+    };
   }
+
+  return state;
 };
 
 //yukarıdaki useCounter function'unu altta kullanıyoruz
@@ -31,14 +47,14 @@ function CounterPage({ initialCount }) {
 
   const decrement = () => {
     dispatch({
-      type: "decrement",
+      type: DECREMENT_COUNT,
     });
   };
 
   const increment = () => {
     //direkt dispatch'deki reducer fonk içine gidecek
     dispatch({
-      type: "increment",
+      type: INCREMENT_COUNT,
     });
   };
 
@@ -46,14 +62,18 @@ function CounterPage({ initialCount }) {
     const value = parseInt(e.target.value) || 0;
     console.log(value);
 
-    // setAddOfValue(value);
+    dispatch({
+      type: CHANGE_VALUE,
+      //reducer'e göndermek istediğimiz değer
+      payload: value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // setCount(count + addOfvalue);
-    // setAddOfValue(0);
+    dispatch({
+      type: "set-value",
+    });
   };
 
   return (
