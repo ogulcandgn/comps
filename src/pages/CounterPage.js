@@ -15,33 +15,25 @@ const ADD_VALUE_TO_COUNT = "add-value";
 const reducer = (state, action) => {
   switch (action.type) {
     case INCREMENT_COUNT: {
-      return {
-        ...state,
-        count: state.count + 1,
-      };
+      state.count = state.count + 1;
+      return;
     }
 
     case DECREMENT_COUNT: {
-      return {
-        ...state,
-        count: state.count - 1,
-      };
+      state.count = state.count - 1;
+      return;
     }
 
     case CHANGE_VALUE: {
-      return {
-        ...state,
-        addOfvalue: action.payload,
-      };
+      state.addOfvalue = action.payload;
+      return;
     }
 
     case ADD_VALUE_TO_COUNT:
       {
-        return {
-          ...state,
-          count: state.count + state.addOfvalue,
-          addOfvalue: 0,
-        };
+        state.count = state.count + state.addOfvalue;
+        state.addOfvalue = 0;
+        return;
       }
       throw Error("Error " + action.type);
   }
