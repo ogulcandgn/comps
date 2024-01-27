@@ -3,6 +3,8 @@ import { useReducer } from "react";
 import Button from "../components/Button";
 //use-counter hookunu burada kullandık
 import Panel from "../components/Panel";
+//immer kütüphanesi
+import { produce } from "immer";
 
 const INCREMENT_COUNT = "increment";
 const DECREMENT_COUNT = "decrement";
@@ -38,6 +40,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           count: state.count + state.addOfvalue,
+          addOfvalue: 0,
         };
       }
       throw Error("Error " + action.type);
@@ -49,7 +52,7 @@ function CounterPage({ initialCount }) {
   //   const [count, setCount] = useState(initialCount);
   //   const [addOfvalue, setAddOfValue] = useState(0);
 
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useReducer(produce(reducer), {
     count: initialCount,
     addOfvalue: 0,
   });
